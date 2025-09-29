@@ -10,7 +10,7 @@ class Animal {
     if (this instanceof Herbivore) {
       this._aliveRecord.hidden = false;
     }
-    Animal.alive.push(this._aliveRecord);
+    Animal.alive.push(this);
   }
   die() {
     Animal.alive = Animal.alive.filter((a) => a.health > 0);
@@ -31,14 +31,12 @@ class Herbivore extends Animal {
 
 class Carnivore extends Animal {
   bite(herbivore) {
-    if (herbivore instanceof Herbivore) {
-      if (!herbivore.hidden) {
-        herbivore.health -= 50;
-        herbivore._aliveRecord.health = herbivore.health;
+    if (herbivore instanceof Herbivore && !herbivore.hidden) {
+      herbivore.health -= 50;
+      herbivore._aliveRecord.health = herbivore.health;
 
-        if (herbivore.health <= 0) {
-          herbivore.die();
-        }
+      if (herbivore.health <= 0) {
+        herbivore.die();
       }
     }
   }
