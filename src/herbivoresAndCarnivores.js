@@ -5,12 +5,16 @@ class Animal {
   constructor(name, health = 100) {
     this.name = name;
     this.health = health;
-    this._aliveRecord = { name: this.name, health: this.health };
+
+    this._aliveRecord = {
+      name: this.name,
+      health: this.health,
+    };
 
     if (this instanceof Herbivore) {
       this._aliveRecord.hidden = false;
     }
-    Animal.alive.push(this);
+    Animal.alive.push(this._aliveRecord);
   }
   die() {
     Animal.alive = Animal.alive.filter((a) => a.health > 0);
